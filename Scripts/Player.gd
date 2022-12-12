@@ -9,6 +9,7 @@ export (int) var jumpStrength = 600
 
 var velocity = Vector2(0,0)
 
+
 func _process(delta):
 	velocity.x = velocity.x + speed
 	if velocity.x > top_speed:
