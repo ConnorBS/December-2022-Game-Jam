@@ -11,8 +11,17 @@ config_version=4
 [application]
 
 config/name="December- 2022- Game- Jam"
+<<<<<<< HEAD
 run/main_scene="res://player.tscn"
+=======
+run/main_scene="res://Scenes/World.tscn"
+>>>>>>> Connor
 config/icon="res://icon.png"
+
+[display]
+
+window/size/width=800
+window/size/height=480
 
 [gui]
 
