@@ -1,19 +1,22 @@
 extends KinematicBody2D
 
 
-export (int) var speed = 50 
-export (int) var top_speed =400
-export (int) var gravity = 1000
-export (int) var jumpStrength = 600
 
+export var speed: = Vector2(200,500)
+export var gravity: = 2500.0
+export var top_speed =400
+export var jumpstrength = 1000
 
-var velocity = Vector2(0,0)
+var velocity : = Vector2.ZERO
 
+func _physics_process(delta: float) -> void:
+	velocity.y += gravity*delta
+	if velocity.y > speed.y:
+		velocity.y = speed.y
+	velocity = move_and_slide(velocity)
+	var direction := Vector2(
+		Input.get_action_strength("move right") - Input.get_action_strength("move left"),1.0
+		)
+	
+	velocity = speed * direction
 
-func _process(delta):
-	velocity.x = velocity.x + speed
-	if velocity.x > top_speed:
-		velocity.x = top_speed
-
-	velocity.y = velocity.y + gravity * delta
-	velocity = move_and_slide(velocity,Vector2.UP)
