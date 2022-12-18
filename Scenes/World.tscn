@@ -1,14 +1,33 @@
+<<<<<<< HEAD
 [gd_scene load_steps=10 format=2]
+=======
+[gd_scene load_steps=13 format=2]
+>>>>>>> Connor
 
 [ext_resource path="res://Scripts/World.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Houses/TextureBlock.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/Camera.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=4]
+<<<<<<< HEAD
 [ext_resource path="res://Scenes/enemy.gd" type="Script" id=5]
 [ext_resource path="res://icon.png" type="Texture" id=6]
+=======
+[ext_resource path="res://Assets/Houses/House1.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Houses/Chimney1.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Houses/House2.png" type="Texture" id=7]
+>>>>>>> Connor
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+points = PoolVector2Array( 256, 128, 0, 128, 0, 64, 256, 64 )
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+points = PoolVector2Array( 64, 128, 0, 128, 0, 64, 64, 64 )
+
+[sub_resource type="ConvexPolygonShape2D" id=5]
+points = PoolVector2Array( 384, 128, 0, 128, 0, 64, 384, 64 )
 
 [sub_resource type="TileSet" id=2]
 0/name = "TextureBlock.png 0"
@@ -32,6 +51,69 @@ points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 0/z_index = 0
+1/name = "House1.png 1"
+1/texture = ExtResource( 5 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 0, 0, 256, 128 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape = SubResource( 3 )
+1/shape_one_way = false
+1/shape_one_way_margin = 1.0
+1/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 3 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+1/z_index = 0
+2/name = "Chimney1.png 2"
+2/texture = ExtResource( 6 )
+2/tex_offset = Vector2( 0, 0 )
+2/modulate = Color( 1, 1, 1, 1 )
+2/region = Rect2( 0, 0, 64, 128 )
+2/tile_mode = 0
+2/occluder_offset = Vector2( 0, 0 )
+2/navigation_offset = Vector2( 0, 0 )
+2/shape_offset = Vector2( 0, 0 )
+2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+2/shape = SubResource( 4 )
+2/shape_one_way = false
+2/shape_one_way_margin = 1.0
+2/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 4 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+2/z_index = 0
+3/name = "House2.png 3"
+3/texture = ExtResource( 7 )
+3/tex_offset = Vector2( 0, 0 )
+3/modulate = Color( 1, 1, 1, 1 )
+3/region = Rect2( 0, 0, 384, 128 )
+3/tile_mode = 0
+3/occluder_offset = Vector2( 0, 0 )
+3/navigation_offset = Vector2( 0, 0 )
+3/shape_offset = Vector2( 0, 0 )
+3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+3/shape = SubResource( 5 )
+3/shape_one_way = false
+3/shape_one_way_margin = 1.0
+3/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 5 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+3/z_index = 0
 
 [sub_resource type="CapsuleShape2D" id=3]
 radius = 30.0
@@ -39,23 +121,25 @@ height = 0.0
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
-
-[node name="Houses" type="TileMap" parent="."]
-position = Vector2( 1, 0 )
-tile_set = SubResource( 2 )
-format = 1
-tile_data = PoolIntArray( 524287, 0, 0, 458752, 0, 0, 458753, 0, 0, 458754, 0, 0, 458755, 0, 0, 458756, 0, 0, 458757, 0, 0, 458758, 0, 0, 458759, 0, 0, 458760, 0, 0, 458761, 0, 0, 458762, 0, 0, 458763, 0, 0, 458764, 0, 0 )
+chance_of_gap = 0.15
+chance_of_chimeny = 0.05
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
+<<<<<<< HEAD
 speed = 500
 top_speed = 8000
 gravity = 1000
+=======
+speed = Vector2( 2000, 500 )
+gravity = 0.0
+>>>>>>> Connor
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2( 209, -55 )
 current = true
 script = ExtResource( 3 )
 
+<<<<<<< HEAD
 [node name="enemy" type="KinematicBody2D" parent="."]
 position = Vector2( -16, 92 )
 script = ExtResource( 5 )
@@ -68,3 +152,9 @@ shape = SubResource( 3 )
 modulate = Color( 0.121569, 0.521569, 0.231373, 1 )
 position = Vector2( 453, 318 )
 texture = ExtResource( 6 )
+=======
+[node name="Houses" type="TileMap" parent="."]
+position = Vector2( 1, 0 )
+tile_set = SubResource( 2 )
+format = 1
+>>>>>>> Connor
