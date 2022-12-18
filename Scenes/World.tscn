@@ -1,21 +1,15 @@
-<<<<<<< HEAD
-[gd_scene load_steps=10 format=2]
-=======
-[gd_scene load_steps=13 format=2]
->>>>>>> Connor
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scripts/World.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Houses/TextureBlock.png" type="Texture" id=2]
 [ext_resource path="res://Scripts/Camera.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=4]
-<<<<<<< HEAD
 [ext_resource path="res://Scenes/enemy.gd" type="Script" id=5]
 [ext_resource path="res://icon.png" type="Texture" id=6]
-=======
-[ext_resource path="res://Assets/Houses/House1.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Houses/Chimney1.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Houses/House2.png" type="Texture" id=7]
->>>>>>> Connor
+[ext_resource path="res://Assets/Houses/House1.png" type="Texture" id=7]
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 29, 30 )
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 64, 64, 0, 64, 0, 0, 64, 0 )
@@ -52,7 +46,6 @@ points = PoolVector2Array( 384, 128, 0, 128, 0, 64, 384, 64 )
 } ]
 0/z_index = 0
 1/name = "House1.png 1"
-1/texture = ExtResource( 5 )
 1/tex_offset = Vector2( 0, 0 )
 1/modulate = Color( 1, 1, 1, 1 )
 1/region = Rect2( 0, 0, 256, 128 )
@@ -115,46 +108,35 @@ points = PoolVector2Array( 384, 128, 0, 128, 0, 64, 384, 64 )
 } ]
 3/z_index = 0
 
-[sub_resource type="CapsuleShape2D" id=3]
-radius = 30.0
-height = 0.0
-
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
 chance_of_gap = 0.15
 chance_of_chimeny = 0.05
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
-<<<<<<< HEAD
 speed = 500
 top_speed = 8000
 gravity = 1000
-=======
-speed = Vector2( 2000, 500 )
-gravity = 0.0
->>>>>>> Connor
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2( 209, -55 )
 current = true
 script = ExtResource( 3 )
 
-<<<<<<< HEAD
 [node name="enemy" type="KinematicBody2D" parent="."]
 position = Vector2( -16, 92 )
 script = ExtResource( 5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="enemy"]
 position = Vector2( 455, 316 )
-shape = SubResource( 3 )
+shape = SubResource( 6 )
 
 [node name="Sprite" type="Sprite" parent="enemy"]
 modulate = Color( 0.121569, 0.521569, 0.231373, 1 )
 position = Vector2( 453, 318 )
 texture = ExtResource( 6 )
-=======
+
 [node name="Houses" type="TileMap" parent="."]
 position = Vector2( 1, 0 )
 tile_set = SubResource( 2 )
 format = 1
->>>>>>> Connor
