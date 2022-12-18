@@ -2,21 +2,46 @@ extends KinematicBody2D
 
 
 
-export var speed: = Vector2(200,500)
-export var gravity: = 2500.0
-export var top_speed =400
-export var jumpstrength = 1000
+export (int) var speed = 50 
+export (int) var top_speed =400
+export (int) var gravity = 1000
+export (int) var jumpStrength = 600
 
-var velocity : = Vector2.ZERO
+var velocity = Vector2(0,0)
 
-func _physics_process(delta: float) -> void:
-	velocity.y += gravity*delta
-	if velocity.y > speed.y:
-		velocity.y = speed.y
-	velocity = move_and_slide(velocity)
-	var direction := Vector2(
-		Input.get_action_strength("move right") - Input.get_action_strength("move left"),1.0
-		)
+##########################
+var double_jump = false
+
+func _process(delta):
+	########################
+	if is_on_floor():
+		double_jump = false
 	
-	velocity = speed * direction
-
+	if Input.is_action_just_pressed("ui_up"):
+		if is_on_floor():
+			velocity.y = velocity.y - jumpStrength
+			print("Jump Pressed: ", velocity)
+		if velocity.y >= 0 and double_jump == false:
+			velocity.y = velocity.y - jumpStrength
+			double_jump = true
+	if Input.is_action_just_pressed("ui_up") and is_on_wall():
+		velocity.y = 0 - jumpStrength
+		print("Jump Pressed: ", velocity)
+	
+		##########################
+		
+	if Input.is_action_pressed("ui_left"):
+		velocity.x = velocity.x - speed
+		if velocity.x < -top_speed:
+			velocity.x = -top_speed
+	elif Input.is_action_pressed("ui_right"):
+		velocity.x = velocity.x + speed
+		if velocity.x > top_speed:
+			velocity.x = top_speed
+	else:
+		velocity.x = velocity.x / 1.5
+		
+	
+	
+	velocity.y = velocity.y + gravity * delta
+	velocity = move_and_slide(velocity,Vector2.UP)
