@@ -15,6 +15,7 @@ export (float) var chance_of_gap = 0.2
 export (float) var chance_of_chimeny = .1
 export (int) var count_gap_max = 2
 export (int) var min_gap_of_chimneys = 7
+export (int) var spawn_distance = 500
 
 var current_gap_count = 0
 var last_chimney_position_x= 0
@@ -59,7 +60,9 @@ func clear_old_tiles():
 func _process(_delta):
 	if round(_player_node.position.x / cell_size.x) > gridPos_x:
 		for i in range(round(_player_node.position.x / cell_size.x - gridPos_x)):
-#			print ("Player Pos: ", (_player_node.position.x / cell_size.x))
+			clear_old_tiles()
+		gridPos_x = round(_player_node.position.x / cell_size.x)
+		while (nextTile.x < spawn_distance+gridPos_x):
 			nextTile.x += 1
 			if nextTile.x >= lastUpdateTile.x:
 				var random_chance_of_gap = randf()
@@ -69,21 +72,20 @@ func _process(_delta):
 					current_gap_count += 1
 					lastUpdateTile.x += 1
 					gap_spawned = true
-					print ("Spawned gap: ", nextTile)
+#					print ("Spawned gap: ", nextTile)
 				
 				if !gap_spawned:
 					var random_chance_of_chimney = randf()
 					if chance_of_chimeny >= random_chance_of_chimney and nextTile.x - last_chimney_position_x >= min_gap_of_chimneys:
 						spawn_chimney(nextTile)
-						print ("Spawned Chimney: ",nextTile)
+#						print ("Spawned Chimney: ",nextTile)
 					
 					current_gap_count = 0
 					determine_house()
-			clear_old_tiles()
 			
-			print ("Next Tile: ",nextTile)
-			print ("Last Updated tile: ", lastUpdateTile)
-		gridPos_x = round(_player_node.position.x / cell_size.x)
+			
+#			print ("Next Tile: ",nextTile)
+#			print ("Last Updated tile: ", lastUpdateTile)
 
 		
 	if round(_player_node.position.y / cell_size.y) >= death_depth:
@@ -93,12 +95,12 @@ func _process(_delta):
 
 func determine_house():
 	var house_int = round(rand_range(1,2))
-	print (house_int)
+#	print (house_int)
 	var house_values = platform_dict["house"+str(house_int)]
 	
 	_houseTile_node.set_cellv (nextTile+house_values["offset position"],house_values["tileset"])
 	lastUpdateTile.x += house_values["next open slot"]
-	print ("Spawned House: ", "house"+str(house_int), " ",nextTile)
+#	print ("Spawned House: ", "house"+str(house_int), " ",nextTile)
 	
 func spawn_chimney(position_to_spawn):
 	var chimney_int = round (rand_range(1,1))
