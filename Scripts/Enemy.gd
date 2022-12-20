@@ -17,3 +17,8 @@ func _physics_process(delta):
 	
 	
 
+
+
+func _on_body_body_entered(body):
+	if body.get_name() == "player":
+		get_tree().reload_current_scene()

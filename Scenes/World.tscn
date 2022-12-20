@@ -13,7 +13,7 @@ chance_of_chimeny = 0.05
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
 speed = 500
-top_speed = 8000
+top_speed = 650
 gravity = 1000
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -22,7 +22,7 @@ current = true
 script = ExtResource( 3 )
 
 [node name="Enemy" parent="." instance=ExtResource( 5 )]
-position = Vector2( 302, 191 )
+position = Vector2( 291, 274 )
 
 [node name="Houses" type="TileMap" parent="."]
 position = Vector2( 1, 0 )
