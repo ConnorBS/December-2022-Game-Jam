@@ -12,6 +12,11 @@ var velocity = Vector2(0,0)
 ##########################
 var double_jump = false
 
+
+func _ready():
+	$AnimationPlayer.play("RunForwards")
+
+
 func _process(delta):
 	########################
 	if is_on_floor():

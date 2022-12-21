@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Grinch-V1.png-adba13948f06b3e57feddff7314548e8.stex"
+path="res://.import/Grinch-V1_run1.png-dbedf147eade7ebd4f3757e19bf24cb8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Grinch-V1.png"
-dest_files=[ "res://.import/Grinch-V1.png-adba13948f06b3e57feddff7314548e8.stex" ]
+source_file="res://Assets/Grinch-V1_run1.png"
+dest_files=[ "res://.import/Grinch-V1_run1.png-dbedf147eade7ebd4f3757e19bf24cb8.stex" ]
 
 [params]
 
