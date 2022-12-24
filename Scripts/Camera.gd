@@ -1,4 +1,9 @@
 extends Camera2D
-func _process(_delta):
-	if self.global_position.y > 270:
-		self.global_position.y = 270
+
+var velocity = Vector2(.1,0)
+export (int) var speed = 20
+
+func _process(delta):
+	self.position.x = self.position.x + velocity.x
+
+

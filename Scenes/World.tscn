@@ -1,10 +1,19 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/World.gd" type="Script" id=1]
 [ext_resource path="res://Assets/TileSet/HousesTileSet.tres" type="TileSet" id=2]
 [ext_resource path="res://Scripts/Camera.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Enemy.tscn" type="PackedScene" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 46.5, 262.5 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 405.5, 22.5 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 32.1563, 244.5 )
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
@@ -14,14 +23,40 @@ chance_of_chimeny = 0.05
 [node name="Player" parent="." instance=ExtResource( 4 )]
 position = Vector2( 136, 340 )
 scale = Vector2( 0.5, 0.5 )
+collision_layer = 32769
+collision_mask = 32769
 speed = 500
-top_speed = 650
+top_speed = 700
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2( 538, -138 )
-scale = Vector2( 2, 2 )
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 405, 271 )
 current = true
 script = ExtResource( 3 )
+
+[node name="Area2D" type="Area2D" parent="Camera2D"]
+collision_layer = 32768
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/Area2D"]
+position = Vector2( -453, -12 )
+shape = SubResource( 1 )
+
+[node name="Area2D2" type="Area2D" parent="Camera2D"]
+position = Vector2( 2, -3 )
+collision_layer = 32768
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/Area2D2"]
+position = Vector2( -1.5, -255.5 )
+shape = SubResource( 2 )
+
+[node name="Area2D3" type="Area2D" parent="Camera2D"]
+collision_layer = 32768
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/Area2D3"]
+position = Vector2( 436.156, -32.5 )
+shape = SubResource( 3 )
 
 [node name="Enemy" parent="." instance=ExtResource( 5 )]
 position = Vector2( 291, 274 )
