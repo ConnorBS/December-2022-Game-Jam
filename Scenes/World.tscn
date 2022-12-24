@@ -1,19 +1,43 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/World.gd" type="Script" id=1]
 [ext_resource path="res://Assets/TileSet/HousesTileSet.tres" type="TileSet" id=2]
 [ext_resource path="res://Scripts/Camera.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Player.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Enemy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Sky.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Mountains.tscn" type="PackedScene" id=7]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 18.125, 300 )
+
+[sub_resource type="ParticlesMaterial" id=2]
+lifetime_randomness = 0.36
+emission_shape = 2
+emission_box_extents = Vector3( 800, 1, 1 )
+flag_disable_z = true
+gravity = Vector3( -45, 98, 0 )
+angular_velocity = 114.06
+angular_velocity_random = 0.24
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle_random = 0.51
+scale = 10.9
+scale_random = 0.93
 
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
-chance_of_gap = 0.15
+chance_of_gap = 0.6
 chance_of_chimeny = 0.05
+
+[node name="Sky" parent="." instance=ExtResource( 6 )]
+
+[node name="Mountains" parent="." instance=ExtResource( 7 )]
+visible = false
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
 position = Vector2( 136, 340 )
-scale = Vector2( 0.5, 0.5 )
+scale = Vector2( 0.4, 0.4 )
 speed = 500
 top_speed = 650
 
@@ -23,6 +47,26 @@ scale = Vector2( 2, 2 )
 current = true
 script = ExtResource( 3 )
 
+[node name="Area2D" type="Area2D" parent="Player/Camera2D"]
+collision_layer = 32768
+collision_mask = 32768
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Camera2D/Area2D"]
+position = Vector2( 797.25, -0.999969 )
+scale = Vector2( 1, 1 )
+shape = SubResource( 1 )
+
+[node name="Particles2D" type="Particles2D" parent="Player/Camera2D"]
+position = Vector2( 79.75, -414.75 )
+amount = 500
+lifetime = 37.8
+preprocess = 16.51
+speed_scale = 1.5
+randomness = 0.68
+visibility_rect = Rect2( 0, -100, 200, 800 )
+process_material = SubResource( 2 )
+
 [node name="Enemy" parent="." instance=ExtResource( 5 )]
 position = Vector2( 291, 274 )
 
@@ -31,3 +75,5 @@ position = Vector2( 1, 0 )
 tile_set = ExtResource( 2 )
 format = 1
 tile_data = PoolIntArray( 458751, 1, 0, 393219, 1, 0, 393223, 3, 0 )
+
+[connection signal="area_exited" from="Player/Camera2D/Area2D" to="." method="_on_Area2D_area_exited"]

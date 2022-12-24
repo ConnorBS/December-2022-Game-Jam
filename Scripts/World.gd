@@ -20,6 +20,13 @@ export (int) var spawn_distance = 500
 var current_gap_count = 0
 var last_chimney_position_x= 0
 
+onready var sky = preload("res://Scenes/Sky.tscn")
+onready var mountains = preload("res://Scenes/Mountains.tscn")
+
+onready var previous_sky:Node
+onready var previous_mountains:Node
+onready var current_sky:Node = $Sky
+onready var current_mountains:Node = $Mountains
 
 const platform_dict = {
 	"house1":{
@@ -70,7 +77,7 @@ func _process(_delta):
 				var gap_spawned = false
 				if chance_of_gap >= random_chance_of_gap and current_gap_count <= chance_of_gap:
 					current_gap_count += 1
-					lastUpdateTile.x += 1
+					lastUpdateTile.x += 2
 					gap_spawned = true
 #					print ("Spawned gap: ", nextTile)
 				
@@ -92,7 +99,9 @@ func _process(_delta):
 		get_tree().reload_current_scene()
 	pass
 
-
+func check_forParralax(node):
+	node =$Sky
+	
 func determine_house():
 	var house_int = round(rand_range(1,2))
 #	print (house_int)
@@ -113,3 +122,27 @@ func set_starting_platform():
 	_houseTile_node.set_cellv(Vector2(-1,6), TILESET.HOUSE1)
 	_houseTile_node.set_cellv(Vector2(3,6), TILESET.HOUSE1)
 	_houseTile_node.set_cellv(Vector2(7,6), TILESET.HOUSE2)
+
+
+func _on_Area2D_area_exited(area):
+	print (area.get_parent().get_parent().name)
+	if area.is_in_group("Sky") and area.get_parent().get_parent()==current_sky:
+		if previous_sky != null:
+			previous_sky.queue_free()
+		previous_sky = current_sky
+		current_sky = sky.instance()
+		current_sky.get_node("ParallaxLayer").position.x += $Player.global_position.x + 750
+		add_child(current_sky)
+		move_child(current_sky,0)
+		
+	elif area.is_in_group("Mountains")and area.get_parent().get_parent()==current_mountains:
+		print ("success")
+		if previous_mountains != null:
+			previous_mountains.queue_free()
+		previous_mountains =  current_mountains
+		current_mountains = mountains.instance()
+		current_sky.get_node("ParallaxLayer").position.x += $Player.global_position.x + 750
+		add_child(current_mountains)
+		move_child(current_mountains,1)
+		
+	pass # Replace with function body.

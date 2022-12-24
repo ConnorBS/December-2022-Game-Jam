@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Parralax/Sky.png" type="Texture" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 750, 475 )
+
+[node name="Sky" type="ParallaxBackground"]
+follow_viewport_enable = true
+scroll_base_scale = Vector2( 0.2, 0.2 )
+scroll_limit_end = Vector2( 1000, 500 )
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+position = Vector2( -95, 132 )
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxLayer"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 15.0
+margin_top = -342.0
+margin_right = 1515.0
+margin_bottom = 793.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 2
+
+[node name="Area2D" type="Area2D" parent="ParallaxLayer" groups=["Sky"]]
+position = Vector2( 15, -160 )
+collision_layer = 32768
+collision_mask = 32768
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ParallaxLayer/Area2D"]
+position = Vector2( 751, 475 )
+shape = SubResource( 1 )
