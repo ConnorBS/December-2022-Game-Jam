@@ -1,14 +1,5 @@
 extends Camera2D
 
-<<<<<<< HEAD
-var velocity = Vector2(.1,0)
-export (int) var speed = 20
-
-func _process(delta):
-	self.position.x = self.position.x + velocity.x
-
-
-=======
 func _process(_delta):
 	
 	if get_parent().global_position.y <300:
@@ -24,4 +15,3 @@ func _process(_delta):
 #		global_position.y += get_parent().global_position.y*_delta
 #
 #
->>>>>>> main
