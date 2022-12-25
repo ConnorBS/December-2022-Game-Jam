@@ -23,10 +23,12 @@ var last_chimney_position_x= 0
 onready var sky = preload("res://Scenes/Sky.tscn")
 onready var mountains = preload("res://Scenes/Mountains.tscn")
 
-onready var previous_sky:Node
-onready var previous_mountains:Node
+#onready var previous_sky:Node
+#onready var previous_mountains:Node
 onready var current_sky:Node = $Sky
 onready var current_mountains:Node = $Mountains
+
+onready var ui_overlay_node = $UIOverlay
 
 const platform_dict = {
 	"house1":{
@@ -68,6 +70,7 @@ func _process(_delta):
 	if round(_player_node.position.x / cell_size.x) > gridPos_x:
 		for i in range(round(_player_node.position.x / cell_size.x - gridPos_x)):
 			clear_old_tiles()
+			ui_overlay_node.add_score(1)
 		gridPos_x = round(_player_node.position.x / cell_size.x)
 		while (nextTile.x < spawn_distance+gridPos_x):
 			nextTile.x += 1
@@ -125,24 +128,29 @@ func set_starting_platform():
 
 
 func _on_Area2D_area_exited(area):
-	print (area.get_parent().get_parent().name)
-	if area.is_in_group("Sky") and area.get_parent().get_parent()==current_sky:
-		if previous_sky != null:
-			previous_sky.queue_free()
-		previous_sky = current_sky
+#	print (area.get_parent().get_parent().name)
+	if area.is_in_group("Sky") :#and area.get_parent().get_parent()==current_sky:
+#		if previous_sky != null:
+#			previous_sky.queue_free()
+#		previous_sky = current_sky
 		current_sky = sky.instance()
-		current_sky.get_node("ParallaxLayer").position.x += $Player.global_position.x + 750
+		current_sky.get_node("ParallaxLayer").global_position.x += $Player.global_position.x + 750
 		add_child(current_sky)
 		move_child(current_sky,0)
 		
-	elif area.is_in_group("Mountains")and area.get_parent().get_parent()==current_mountains:
-		print ("success")
-		if previous_mountains != null:
-			previous_mountains.queue_free()
-		previous_mountains =  current_mountains
+	elif area.is_in_group("Mountains"):#and area.get_parent().get_parent()==current_mountains:
+#		print ("success")
+#		if previous_mountains != null:
+#			previous_mountains.queue_free()
+#		previous_mountains =  current_mountains
 		current_mountains = mountains.instance()
-		current_sky.get_node("ParallaxLayer").position.x += $Player.global_position.x + 750
+		current_mountains.get_node("ParallaxLayer").global_position.x += $Player.global_position.x + 750
 		add_child(current_mountains)
 		move_child(current_mountains,1)
 		
+	pass # Replace with function body.
+
+
+func _on_Exit_area_exited(area):
+	area.get_parent().get_parent().queue_free()
 	pass # Replace with function body.

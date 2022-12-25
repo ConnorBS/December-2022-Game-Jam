@@ -25,9 +25,9 @@ func _process(delta):
 	
 	if Input.is_action_just_pressed("jump"):
 		if is_on_floor():
-			print (velocity)
+#			print (velocity)
 			velocity.y = velocity.y - jumpStrength
-			print("Jump Pressed: ", velocity)
+#			print("Jump Pressed: ", velocity)
 		if velocity.y >= 0 and double_jump == false:
 			velocity.y = velocity.y - jumpStrength
 			double_jump = true
@@ -41,18 +41,18 @@ func _process(delta):
 #		velocity.x = velocity.x - speed
 #		if velocity.x < -top_speed:
 #			velocity.x = -top_speed
-	if Input.is_action_pressed("move right"):
-		velocity.x = velocity.x + speed
-		if velocity.x > top_speed:
-			velocity.x = top_speed
-	else:
-		velocity.x = velocity.x / 1.5
+#	if Input.is_action_pressed("move right"):
+	velocity.x = velocity.x + speed
+	if velocity.x > top_speed:
+		velocity.x = top_speed
+#	else:
+#		velocity.x = velocity.x / 1.5
 	
 	var new_rotation = rotation_degrees
-	if Input.is_action_pressed("move right"):
-		new_rotation += (delta*angle_rotation_speed)
-	else:
-		new_rotation -= (delta*angle_rotation_speed*2)
+#	if Input.is_action_pressed("move right"):
+	new_rotation += (delta*angle_rotation_speed)*(velocity.x*speed)
+#	else:
+#		new_rotation -= (delta*angle_rotation_speed*2)
 	if new_rotation > max_angle_speed:
 		new_rotation = max_angle_speed
 	elif new_rotation < 0:
