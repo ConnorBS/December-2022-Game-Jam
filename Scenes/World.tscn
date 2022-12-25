@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-[gd_scene load_steps=9 format=2]
-=======
 [gd_scene load_steps=15 format=2]
->>>>>>> main
 
 [ext_resource path="res://Scripts/World.gd" type="Script" id=1]
 [ext_resource path="res://Assets/TileSet/HousesTileSet.tres" type="TileSet" id=2]
@@ -54,15 +50,6 @@ angle_random = 0.51
 scale = 10.9
 scale_random = 0.93
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 46.5, 262.5 )
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 405.5, 22.5 )
-
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 32.1563, 244.5 )
-
 [node name="World" type="Node2D"]
 script = ExtResource( 1 )
 chance_of_gap = 0.6
@@ -71,7 +58,6 @@ chance_of_chimeny = 0.05
 [node name="Sky" type="Sprite" parent="."]
 material = SubResource( 4 )
 position = Vector2( 409, 214 )
-scale = Vector2( 1, 1 )
 z_index = -3
 texture = ExtResource( 7 )
 script = ExtResource( 9 )
@@ -79,54 +65,22 @@ script = ExtResource( 9 )
 [node name="Mountains" type="Sprite" parent="."]
 material = SubResource( 6 )
 position = Vector2( 404, 125 )
-scale = Vector2( 1, 1 )
 z_index = -3
 texture = ExtResource( 6 )
 script = ExtResource( 9 )
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
 position = Vector2( 136, 340 )
-<<<<<<< HEAD
-scale = Vector2( 0.5, 0.5 )
-collision_layer = 32769
-collision_mask = 32769
-=======
 scale = Vector2( 0.4, 0.4 )
->>>>>>> main
 speed = 500
-top_speed = 700
+top_speed = 650
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 405, 271 )
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2( 538, -138 )
+scale = Vector2( 2, 2 )
 current = true
 script = ExtResource( 3 )
 
-<<<<<<< HEAD
-[node name="Area2D" type="Area2D" parent="Camera2D"]
-collision_layer = 32768
-collision_mask = 32768
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/Area2D"]
-position = Vector2( -453, -12 )
-shape = SubResource( 1 )
-
-[node name="Area2D2" type="Area2D" parent="Camera2D"]
-position = Vector2( 2, -3 )
-collision_layer = 32768
-collision_mask = 32768
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/Area2D2"]
-position = Vector2( -1.5, -255.5 )
-shape = SubResource( 2 )
-
-[node name="Area2D3" type="Area2D" parent="Camera2D"]
-collision_layer = 32768
-collision_mask = 32768
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/Area2D3"]
-position = Vector2( 436.156, -32.5 )
-shape = SubResource( 3 )
-=======
 [node name="Enter" type="Area2D" parent="Player/Camera2D"]
 collision_layer = 32768
 collision_mask = 32768
@@ -134,7 +88,6 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Camera2D/Enter"]
 position = Vector2( 797.25, -0.999969 )
-scale = Vector2( 1, 1 )
 shape = SubResource( 1 )
 
 [node name="Exit" type="Area2D" parent="Player/Camera2D"]
@@ -145,7 +98,6 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Camera2D/Exit"]
 position = Vector2( 797.25, -0.999969 )
-scale = Vector2( 1, 1 )
 shape = SubResource( 1 )
 
 [node name="Particles2D" type="Particles2D" parent="Player/Camera2D"]
@@ -157,7 +109,6 @@ speed_scale = 1.5
 randomness = 0.68
 visibility_rect = Rect2( 0, -100, 200, 800 )
 process_material = SubResource( 2 )
->>>>>>> main
 
 [node name="Enemy" parent="." instance=ExtResource( 5 )]
 position = Vector2( 291, 274 )
@@ -179,7 +130,6 @@ margin_bottom = 40.0
 margin_top = 13.0
 margin_right = 39.0
 margin_bottom = 27.0
-rect_scale = Vector2( 2, 2 )
 text = "Score:"
 
 [node name="ScorePoint" type="Label" parent="UIOverlay/HBoxContainer"]
@@ -187,7 +137,6 @@ margin_left = 43.0
 margin_top = 13.0
 margin_right = 91.0
 margin_bottom = 27.0
-rect_scale = Vector2( 2, 2 )
 text = "000000"
 
 [connection signal="area_exited" from="Player/Camera2D/Enter" to="." method="_on_Area2D_area_exited"]
