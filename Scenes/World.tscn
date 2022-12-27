@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scripts/World.gd" type="Script" id=1]
 [ext_resource path="res://Assets/TileSet/HousesTileSet.tres" type="TileSet" id=2]
@@ -32,9 +32,6 @@ shader_param/speed_scale = 0.1
 shader = SubResource( 5 )
 shader_param/direction = Vector2( 1, 0 )
 shader_param/speed_scale = 0.05
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 18.125, 300 )
 
 [sub_resource type="ParticlesMaterial" id=2]
 lifetime_randomness = 0.36
@@ -81,25 +78,6 @@ scale = Vector2( 2, 2 )
 current = true
 script = ExtResource( 3 )
 
-[node name="Enter" type="Area2D" parent="Player/Camera2D"]
-collision_layer = 32768
-collision_mask = 32768
-monitorable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Camera2D/Enter"]
-position = Vector2( 797.25, -0.999969 )
-shape = SubResource( 1 )
-
-[node name="Exit" type="Area2D" parent="Player/Camera2D"]
-position = Vector2( -1507.75, -4.74997 )
-collision_layer = 32768
-collision_mask = 32768
-monitorable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Camera2D/Exit"]
-position = Vector2( 797.25, -0.999969 )
-shape = SubResource( 1 )
-
 [node name="Particles2D" type="Particles2D" parent="Player/Camera2D"]
 position = Vector2( 79.75, -414.75 )
 amount = 500
@@ -111,13 +89,13 @@ visibility_rect = Rect2( 0, -100, 200, 800 )
 process_material = SubResource( 2 )
 
 [node name="Enemy" parent="." instance=ExtResource( 5 )]
-position = Vector2( 291, 274 )
+position = Vector2( 560, 356 )
 
 [node name="Houses" type="TileMap" parent="."]
 position = Vector2( 1, 0 )
 tile_set = ExtResource( 2 )
 format = 1
-tile_data = PoolIntArray( 458751, 1, 0, 393219, 1, 0, 393223, 3, 0 )
+tile_data = PoolIntArray( 327686, 2, 0, 458751, 1, 0, 393219, 1, 0, 393223, 3, 0 )
 
 [node name="UIOverlay" type="CanvasLayer" parent="."]
 script = ExtResource( 8 )
@@ -138,6 +116,3 @@ margin_top = 13.0
 margin_right = 91.0
 margin_bottom = 27.0
 text = "000000"
-
-[connection signal="area_exited" from="Player/Camera2D/Enter" to="." method="_on_Area2D_area_exited"]
-[connection signal="area_exited" from="Player/Camera2D/Exit" to="." method="_on_Exit_area_exited"]

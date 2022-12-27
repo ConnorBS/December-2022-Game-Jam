@@ -10,6 +10,8 @@ export (float) var max_angle_speed = 12.5
 export (int) var angle_rotation_speed = 10
 var velocity = Vector2(0,0)
 
+var slowing_down =false
+var old_velocity
 ##########################
 var double_jump = false
 
@@ -19,6 +21,7 @@ var double_jump = false
 
 
 func _process(delta):
+	old_velocity = velocity
 	########################
 	if is_on_floor():
 		double_jump = false
@@ -37,20 +40,37 @@ func _process(delta):
 	
 		##########################
 #
-#	if Input.is_action_pressed("move left"):
+	if Input.is_action_pressed("move left"):
+		velocity.x = velocity.x / 1.5
+		
 #		velocity.x = velocity.x - speed
 #		if velocity.x < -top_speed:
 #			velocity.x = -top_speed
 #	if Input.is_action_pressed("move right"):
-	velocity.x = velocity.x + speed
+	else:
+		velocity.x = velocity.x + speed
 	if velocity.x > top_speed:
 		velocity.x = top_speed
 #	else:
 #		velocity.x = velocity.x / 1.5
+
+
+	velocity.y = velocity.y + gravity * delta
+	velocity = move_and_slide(velocity,Vector2.UP)
+	
+	if old_velocity.x > velocity.x:
+		slowing_down = true
+	elif slowing_down == true and velocity.x < top_speed:
+		slowing_down = false
 	
 	var new_rotation = rotation_degrees
 #	if Input.is_action_pressed("move right"):
-	new_rotation += (delta*angle_rotation_speed)*(velocity.x*speed)
+#	if slowing_down:
+##		new_rotation =(delta*angle_rotation_speed)*(velocity.x/top_speed)
+#		new_rotation = velocity.x*top_speed/delta/angle_rotation_speed
+#	else:
+	new_rotation += (delta*angle_rotation_speed)*(velocity.x/top_speed)
+	print("(",(delta*angle_rotation_speed)*(velocity.x/top_speed), "=",new_rotation)
 #	else:
 #		new_rotation -= (delta*angle_rotation_speed*2)
 	if new_rotation > max_angle_speed:
@@ -59,7 +79,5 @@ func _process(delta):
 		new_rotation = 0
 	rotation_degrees = new_rotation
 #	print(new_rotation)
-	velocity.y = velocity.y + gravity * delta
-	velocity = move_and_slide(velocity,Vector2.UP)
 	
 	
