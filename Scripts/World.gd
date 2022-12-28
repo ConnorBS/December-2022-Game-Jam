@@ -22,6 +22,7 @@ var last_chimney_position_x= 0
 
 onready var sky = preload("res://Scenes/Sky.tscn")
 onready var mountains = preload("res://Scenes/Mountains.tscn")
+const Gameoverscreen = preload("res://Scenes/Gameoverscreen.tscn")
 
 #onready var previous_sky:Node
 #onready var previous_mountains:Node
@@ -99,7 +100,7 @@ func _process(_delta):
 
 		
 	if round(_player_node.position.y / cell_size.y) >= death_depth:
-		get_tree().reload_current_scene()
+		get_tree().change_scene("res://Scenes/Gameoverscreen.tscn")
 	pass
 
 func check_forParralax(node):

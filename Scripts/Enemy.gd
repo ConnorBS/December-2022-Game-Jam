@@ -35,7 +35,7 @@ func tween():
 
 func _on_body_body_entered(body):
 	if body.get_name() == "Player":
-		get_tree().reload_current_scene()
+		get_tree().change_scene("res://Scenes/Gameoverscreen.tscn")
 
 
 func _on_Tween_tween_all_completed():
