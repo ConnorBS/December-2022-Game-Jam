@@ -16,6 +16,7 @@ export (float) var chance_of_chimeny = .1
 export (int) var count_gap_max = 2
 export (int) var min_gap_of_chimneys = 7
 export (int) var spawn_distance = 500
+export (float) var chance_of_raccoon = .1
 
 var current_gap_count = 0
 var last_chimney_position_x= 0
@@ -23,6 +24,8 @@ var last_chimney_position_x= 0
 onready var sky = preload("res://Scenes/Sky.tscn")
 onready var mountains = preload("res://Scenes/Mountains.tscn")
 const Gameoverscreen = preload("res://Scenes/Gameoverscreen.tscn")
+onready var raccoon = preload("res://Scenes/Enemy.tscn")
+
 
 #onready var previous_sky:Node
 #onready var previous_mountains:Node
@@ -93,7 +96,9 @@ func _process(_delta):
 					
 					current_gap_count = 0
 					determine_house()
-			
+					var random_chance_of_raccoon = randf()
+					if chance_of_raccoon >= random_chance_of_raccoon:
+						spawn_raccoon(nextTile)
 			
 #			print ("Next Tile: ",nextTile)
 #			print ("Last Updated tile: ", lastUpdateTile)
@@ -151,7 +156,16 @@ func _on_Area2D_area_exited(area):
 		
 	pass # Replace with function body.
 
-
+func spawn_raccoon(position_to_spawn):
+	var new_raccoon = raccoon.instance()
+	self.add_child(new_raccoon)
+	self.move_child(new_raccoon,3)
+	print (new_raccoon.position)
+	new_raccoon.position = Vector2(cell_size.x*position_to_spawn.x,6*cell_size.y)
+	
+	
+	
+	
 func _on_Exit_area_exited(area):
 	area.get_parent().get_parent().queue_free()
 	pass # Replace with function body.

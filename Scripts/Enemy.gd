@@ -22,6 +22,8 @@ func _physics_process(delta):
 		motion.x = -motion.x
 	motion = move_and_slide(motion,Vector2.UP)
 	print(scale.x)
+	if self.position.y > 500:
+		self.queue_free()
 	
 
 func tween():

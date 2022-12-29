@@ -6,6 +6,7 @@ var score_value = 0
 func add_score(value):
 	score_value += value
 	$HBoxContainer/ScorePoint.text = score_to_string(score_value)
+	PlayerStats.new_score(score_value)
 
 
 func score_to_string(score):
